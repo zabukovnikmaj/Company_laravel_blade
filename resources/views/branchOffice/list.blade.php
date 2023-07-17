@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List branch offices</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+@extends('partials.navBar');
+
+<div class="container">
+    <h1>Branch offices information</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <a href="{{ url('/branchOffices/create') }}" class="btn btn-primary">New branch office</a>
+                <a href="{{ url('/') }}" class="btn btn-default">Back</a>
+            </p>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Products</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr><td>{{$branchOffices}}</td></tr>
+                @if (count($branchOffices) > 0)
+                    @foreach ($branchOffices as $branchOffice)
+                        <tr>
+                            <td>{{ $branchOffice['name'] }}</td>
+                            <td>{{ $branchOffice['address'] }}</td>
+                            <td>{{ $branchOffice['products'] }}</td>
+                            <td>
+                                <form action="{{ url('/branchOffice/delete', $branchOffice['uuid']) }}"
+                                      method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <a href="{{ url('/branchOffice/edit', $branchOffice['uuid']) }}"
+                                       class="btn btn-primary btn-sm">Edit</a>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Confirm?');">Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="4">No branch offices found!</td>
+                    </tr>
+                @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
