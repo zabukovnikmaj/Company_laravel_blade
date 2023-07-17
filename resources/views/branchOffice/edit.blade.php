@@ -11,12 +11,22 @@
 
 <div class="container mt-5">
     <h1>Enter information about the branch office</h1>
-    @php
-        if (!isset($err)) {
-            $err = [];
-        }
-    @endphp
-    {{ Form::open(array('url' => 'foo/bar')) }}
+    <div class="col-md-12">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="/branchOffice/create" method="POST">
+            @csrf
+            @if(isset($filteredData['name']))
+                @method('PUT')
+            @endif
         <div class="form-group">
             <label for="name">Branch name</label>
             <input type="text" class="form-control {{ isset($err['name']) ? 'is-invalid' : '' }}" name="name"
@@ -48,7 +58,7 @@
 
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="/branchOffice/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
-    {{ Form::close() }}
+        </form>
 </div>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

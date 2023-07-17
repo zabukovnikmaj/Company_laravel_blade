@@ -18,9 +18,21 @@
     @endphp
     <div class="row">
         <div class="col-md-12">
-            <form action="" method="POST">
-                @method('PUT')
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="/employees/create" method="POST">
                 @csrf
+                @if(isset($filteredData['name']))
+                    @method('PUT')
+                @endif
 
                 <div class="form-group">
                     <label for="branchOffice">Branch office name</label><br>

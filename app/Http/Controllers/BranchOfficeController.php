@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BranchOffice;
+use App\Models\BranchOfficeProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,5 +28,27 @@ class BranchOfficeController extends Controller
             'products' => Product::all(),
             'productsData' => $branchOffice->product()->pluck('products.uuid')->toArray(),
         ]);
+    }
+    public function save(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:60'],
+            'address' => ['required', 'max:60'],
+            'products' => ['required'],
+        ]);
+
+        $branchOffice = new BranchOffice();
+        $branchOffice->name = $validatedData['name'];
+        $branchOffice->address = $validatedData['address'];
+        $branchOffice->save();
+
+        foreach ($validatedData['products'] as $product){
+            $branchOfficeProduct = new BranchOfficeProduct();
+            $branchOfficeProduct->branch_office_uuid = $branchOffice->uuid;
+            $branchOfficeProduct->product_uuid = $product;
+            $branchOfficeProduct->save();
+        }
+
+        return redirect('branchOffice/list/');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
@@ -22,7 +23,6 @@ class ProductsController extends Controller
     {
         return view('products.edit', [
             'filteredData' => $product,
-            'method' => empty($product) ? 'POST' : 'PUT',
         ]);
     }
 
