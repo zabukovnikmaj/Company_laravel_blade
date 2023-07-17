@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Products extends Model
+class Product extends Model
 {
     use HasUuids;
     use HasFactory;
@@ -15,4 +15,9 @@ class Products extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
+
+    public function branchOffice()
+    {
+        return $this->belongsToMany(BranchOffice::class, 'BranchOfficeProduct', 'productId', 'branchOfficeId');
+    }
 }
