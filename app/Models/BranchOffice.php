@@ -14,6 +14,7 @@ class BranchOffice extends Model
     use HasUuids;
     use HasFactory;
 
+    public $table = 'branchOffice';
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
@@ -25,10 +26,10 @@ class BranchOffice extends Model
      */
     public function employees(): HasMany
     {
-        return $this->hasMany(Employees::class);
+        return $this->hasMany(Employee::class);
     }
 
-    public function products(): MorphToMany {
-        return $this->morphToMany(Products::class, 'branchOfficeProduct');
+    public function product() {
+        return $this->belongsToMany(Product::class, 'BranchOfficeProduct');
     }
 }

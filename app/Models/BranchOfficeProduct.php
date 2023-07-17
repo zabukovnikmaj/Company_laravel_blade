@@ -10,7 +10,19 @@ class BranchOfficeProduct extends Model
 {
     use HasUuids;
     use HasFactory;
+
+    public $table = 'branchOfficeProduct';
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
+
+    public function branchOffice()
+    {
+        return $this->belongsTo(BranchOffice::class, 'branchOfficeId', 'uuid');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'productId', 'uuid');
+    }
 }
