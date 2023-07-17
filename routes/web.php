@@ -29,16 +29,17 @@ Route::prefix('products')->group(function () {
     Route::get('/list', [Controllers\ProductsController::class, 'list']);
     Route::get('/create', [Controllers\ProductsController::class, 'edit']);
     Route::post('/create', [Controllers\ProductsController::class, 'save']);
-    Route::get('/edit/{employees}', [Controllers\ProductsController::class, 'edit']);
-    Route::put('/edit/{employees}', [Controllers\ProductsController::class, 'update']);
-    Route::delete('/delete/{employees}', [Controllers\ProductsController::class, 'delete']);
+    Route::get('/edit/{product}', [Controllers\ProductsController::class, 'edit']);
+    Route::put('/edit/{product}', [Controllers\ProductsController::class, 'update']);
+    Route::delete('/delete/{product}', [Controllers\ProductsController::class, 'delete']);
+    Route::get('/images/{product}', [Controllers\ProductsController::class, 'image']);
 });
 
 Route::prefix('employees')->group(function () {
     Route::get('/list', [Controllers\EmployeesController::class, 'list']);
     Route::get('/create', [Controllers\EmployeesController::class, 'edit']);
     Route::post('/create', [Controllers\EmployeesController::class, 'save']);
-    Route::get('/edit/{employees}', [Controllers\EmployeesController::class, 'edit']);
-    Route::put('/edit/{employees}', [Controllers\EmployeesController::class, 'update']);
-    Route::delete('/delete/{employees}', [Controllers\EmployeesController::class, 'delete']);
+    Route::get('/edit/{employee}', [Controllers\EmployeesController::class, 'edit']);
+    Route::put('/edit/{employee}', [Controllers\EmployeesController::class, 'update']);
+    Route::delete('/delete/{employee}', [Controllers\EmployeesController::class, 'delete']);
 });
