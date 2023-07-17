@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <p>
-                <a href="{{ url('/branchOffices/create') }}" class="btn btn-primary">New branch office</a>
+                <a href="{{ url('/branchOffice/create') }}" class="btn btn-primary">New branch office</a>
                 <a href="{{ url('/') }}" class="btn btn-default">Back</a>
             </p>
             <table class="table">
@@ -27,7 +27,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr><td>{{$branchOffices}}</td></tr>
                 @if (count($branchOffices) > 0)
                     @foreach ($branchOffices as $branchOffice)
                         <tr>

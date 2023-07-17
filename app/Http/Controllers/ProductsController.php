@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -15,5 +16,33 @@ class ProductsController extends Controller
         return view('products.list', [
             'products' => Product::all(),
         ]);
+    }
+
+    public function edit(Request $request, Product $product)
+    {
+        return view('products.edit', [
+            'filteredData' => $product,
+            'method' => empty($product) ? 'POST' : 'PUT',
+        ]);
+    }
+
+    public function save(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:60'],
+            'description' => ['required', 'max:255'],
+            'price' => ['required', 'numeric'],
+            'deliveryDate' => ['required', 'date'],
+        ]);
+
+        $product = new Product();
+        $product->name = $validatedData['name'];
+        $product->description = $validatedData['description'];
+        $product->price = $validatedData['price'];
+        $product->date = $validatedData['deliveryDate'];
+        $product->fileType = isset($_FILES["file"]["name"]) ? pathinfo($_FILES["file"]["name"])['extension'] : 'png';
+        $product->save();
+
+        return redirect('products/list/');
     }
 }

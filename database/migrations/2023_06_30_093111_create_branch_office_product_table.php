@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('BranchOfficeProduct', function (Blueprint $table) {
             $table->string('uuid')->primary();
-            $table->string('branchOfficeId');
-            $table->string('productId');
+            $table->string('branch_office_uuid');
+            $table->string('product_uuid');
             $table->timestamps();
 
-            $table->foreign('branchOfficeId')
+            $table->foreign('branch_office_uuid')
                 ->references('uuid')
                 ->on('BranchOffice');
-            $table->foreign('productId')
+            $table->foreign('product_uuid')
                 ->references('uuid')
                 ->on('Products');
         });

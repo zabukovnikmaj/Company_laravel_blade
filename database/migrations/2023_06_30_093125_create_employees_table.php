@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('Employees', function (Blueprint $table) {
             $table->string('uuid')->primary();
-            $table->string('branchOffice');
+            $table->string('branch_office');
             $table->string('name');
             $table->string('position');
             $table->integer('age');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->timestamps();
 
-            $table->foreign('branchOffice')
+            $table->foreign('branch_office')
                 ->references('uuid')
                 ->on('BranchOffice');
         });
