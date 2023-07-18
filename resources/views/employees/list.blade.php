@@ -38,17 +38,17 @@
                 @if (count($employees) > 0)
                     @foreach ($employees as $employee)
                         <tr>
-                            <td>{{ $employee['branchOffice'] == null ? 'This branch office does not exist!' : $employee['branchOffice'] }}</td>
-                            <td>{{ $employee['name'] }}</td>
-                            <td>{{ $employee['position'] }}</td>
-                            <td>{{ $employee['age'] }}</td>
-                            <td>{{ $employee['sex'] }}</td>
-                            <td>{{ $employee['email'] }}</td>
+                            <td>{{ $employee->branchOffice == null ? 'This branch office does not exist!' : $employee->branchOffice }}</td>
+                            <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->position }}</td>
+                            <td>{{ $employee->age }}</td>
+                            <td>{{ $employee->sex }}</td>
+                            <td>{{ $employee->email }}</td>
                             <td>
-                                <form action="{{ url('/employees/delete', $employee['uuid']) }}" method="POST">
+                                <form action="{{ url('/employees/delete', $employee->uuid) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ url('/employees/edit', $employee['uuid']) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ url('/employees/edit', $employee->uuid) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
                                 </form>
                             </td>

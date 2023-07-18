@@ -32,6 +32,6 @@ class Employee extends Model
      */
     public function branchOffice(): BelongsTo
     {
-        return $this->belongsTo(BranchOffice::class);
+        return $this->belongsTo(BranchOffice::class, 'branch_office', 'uuid');
     }
 }

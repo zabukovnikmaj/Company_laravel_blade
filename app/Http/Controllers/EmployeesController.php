@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BranchOffice;
 use \App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class EmployeesController extends Controller
@@ -16,8 +17,14 @@ class EmployeesController extends Controller
      */
     public function list()
     {
+        $employees = DB::table('employees')
+            ->join('branchOffice', 'employees.branch_office', '=', 'branchOffice.uuid')
+            ->select('employees.*', 'branchOffice.name AS branchOffice')
+            ->get()
+            ->toArray();
+
         return view('employees.list', [
-            'employees' => Employee::all(),
+            'employees' => $employees,
         ]);
     }
 
