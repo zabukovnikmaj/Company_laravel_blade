@@ -29,6 +29,7 @@ class BranchOfficeController extends Controller
             'productsData' => $branchOffice->product()->pluck('products.uuid')->toArray(),
         ]);
     }
+
     public function save(Request $request)
     {
         $validatedData = $request->validate([
@@ -42,7 +43,7 @@ class BranchOfficeController extends Controller
         $branchOffice->address = $validatedData['address'];
         $branchOffice->save();
 
-        foreach ($validatedData['products'] as $product){
+        foreach ($validatedData['products'] as $product) {
             $branchOfficeProduct = new BranchOfficeProduct();
             $branchOfficeProduct->branch_office_uuid = $branchOffice->uuid;
             $branchOfficeProduct->product_uuid = $product;
@@ -50,5 +51,12 @@ class BranchOfficeController extends Controller
         }
 
         return redirect('branchOffice/list/');
+    }
+
+    public function delete(Request $request, BranchOffice $branchOffice)
+    {
+        $branchOffice->delete();
+
+        return redirect('branchOffice/list');
     }
 }

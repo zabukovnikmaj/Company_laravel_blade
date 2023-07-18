@@ -45,4 +45,11 @@ class ProductsController extends Controller
 
         return redirect('products/list/');
     }
+
+    public function delete(Request $request, Product $product)
+    {
+        $product->delete();
+
+        return redirect('products/list');
+    }
 }

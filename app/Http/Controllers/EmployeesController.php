@@ -31,6 +31,7 @@ class EmployeesController extends Controller
     public function save(Request $request)
     {
         $validatedData = $request->validate([
+            'branchOffice' => ['required'],
             'name' => ['required', 'max:60'],
             'position' => ['required', 'max:60'],
             'age' => ['required', 'numeric', 'min:18', 'max:100'],
@@ -39,6 +40,7 @@ class EmployeesController extends Controller
         ]);
 
         $employee = new Employee();
+        $employee->branch_office = $validatedData['branchOffice'];
         $employee->name = $validatedData['name'];
         $employee->position = $validatedData['position'];
         $employee->age = $validatedData['age'];
@@ -47,5 +49,12 @@ class EmployeesController extends Controller
         $employee->save();
 
         return redirect('employees/list/');
+    }
+
+    public function delete(Request $request, Employee $employee)
+    {
+        $employee->delete();
+
+        return redirect('employees/list');
     }
 }
