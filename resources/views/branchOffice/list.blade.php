@@ -35,15 +35,15 @@
                 @if (count($branchOffices) > 0)
                     @foreach ($branchOffices as $branchOffice)
                         <tr>
-                            <td>{{ $branchOffice['name'] }}</td>
-                            <td>{{ $branchOffice['address'] }}</td>
-                            <td>{{ $branchOffice['products'] }}</td>
+                            <td>{{ $branchOffice->name }}</td>
+                            <td>{{ $branchOffice->address }}</td>
+                            <td>{{ $branchOffice->products }}</td>
                             <td>
-                                <form action="{{ url('/branchOffice/delete', $branchOffice['uuid']) }}"
+                                <form action="{{ url('/branchOffice/delete', $branchOffice->uuid) }}"
                                       method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ url('/branchOffice/edit', $branchOffice['uuid']) }}"
+                                    <a href="{{ url('/branchOffice/edit', $branchOffice->uuid) }}"
                                        class="btn btn-primary btn-sm">Edit</a>
                                     <button type="submit" class="btn btn-danger btn-sm"
                                             onclick="return confirm('Confirm?');">Delete

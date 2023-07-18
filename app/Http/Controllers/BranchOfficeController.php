@@ -6,6 +6,7 @@ use App\Models\BranchOffice;
 use App\Models\BranchOfficeProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BranchOfficeController extends Controller
 {
@@ -16,8 +17,16 @@ class BranchOfficeController extends Controller
      */
     public function list()
     {
+        $branchOffices = DB::table('BranchOffice')
+            ->select('BranchOffice.*', DB::raw('GROUP_CONCAT(Products.name) AS products'))
+            ->leftJoin('BranchOfficeProduct', 'BranchOffice.uuid', '=', 'BranchOfficeProduct.branch_office_uuid')
+            ->leftJoin('Products', 'Products.uuid', '=', 'BranchOfficeProduct.product_uuid')
+            ->groupBy('BranchOffice.uuid')
+            ->get()
+            ->toArray();
+
         return view('branchOffice.list', [
-            'branchOffices' => BranchOffice::all(),
+            'branchOffices' => $branchOffices,
         ]);
     }
 
