@@ -35,7 +35,7 @@ class BranchOfficeController extends Controller
         return view('branchOffice.edit', [
             'filteredData' => $branchOffice,
             'products' => Product::all(),
-            'productsData' => $branchOffice->product()->pluck('products.uuid')->toArray(),
+            'productsData' => $branchOffice->products->pluck('uuid')->toArray(),
         ]);
     }
 

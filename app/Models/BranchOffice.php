@@ -33,7 +33,7 @@ class BranchOffice extends Model
         return $this->hasMany(Employee::class);
     }
 
-    public function product() {
-        return $this->belongsToMany(Product::class, 'BranchOfficeProduct');
+    public function products() {
+        return $this->belongsToMany(Product::class, 'BranchOfficeProduct', 'branch_office_uuid', 'product_uuid');
     }
 }

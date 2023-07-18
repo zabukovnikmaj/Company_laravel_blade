@@ -49,7 +49,7 @@
             <label for="products">Products name</label> <br>
             @include('partials.productsCheckbox', [
                 'products' => $products,
-                'productsData' => is_array($filteredData['products']) ? $filteredData['products'] : explode(',', $filteredData['products'])
+                'productsData' => $productsData,
             ])
             @include('partials.errors', [
                 'err' => $err['products'] ?? null

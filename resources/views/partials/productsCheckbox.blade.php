@@ -1,5 +1,5 @@
 @php
-    if (!isset($productsData)) {
+    if (empty($productsData)) {
         $productsData = [];
     }
 @endphp
@@ -7,8 +7,8 @@
 @if (isset($products) && !empty($products))
     @foreach ($products as $product)
         <label>
-            <input type="checkbox" name="products[]" value="{{ htmlspecialchars($product['uuid']) }}"
-                {{ in_array($product['uuid'], $productsData) ? 'checked' : '' }}>
+            <input type="checkbox" name="products[]" value="{{ $product->uuid }}"
+                {{ in_array($product->uuid, $productsData) ? 'checked' : '' }}>
             {{ htmlspecialchars($product['name']) }}
         </label><br>
     @endforeach
