@@ -39,7 +39,13 @@
                     <td>{{ $product['price'] }}</td>
                     <td>{{ $product['date'] }}</td>
                     <td>
-                        <img src="/products/images/{{ $product['uuid'] }}" alt="product picture"
+                        @php
+                        $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $product->uuid);
+						if(count($filename) === 0){
+							$filename = [''];
+						}
+                        @endphp
+                        <img src="{{ Storage::url($filename[0]) }}" alt="product picture"
                              style="max-width: 300px; max-height: 300px">
                     </td>
                     <td>

@@ -32,7 +32,7 @@ Route::prefix('products')->group(function () {
     Route::get('/edit/{product}', [Controllers\ProductsController::class, 'edit']);
     Route::put('/edit/{product}', [Controllers\ProductsController::class, 'update']);
     Route::delete('/delete/{product}', [Controllers\ProductsController::class, 'delete']);
-    Route::get('/images/{product}', [Controllers\ProductsController::class, 'image']);
+    Route::get('/storage/{product}', [Controllers\ProductsController::class, 'image']);
 });
 
 Route::prefix('employees')->group(function () {

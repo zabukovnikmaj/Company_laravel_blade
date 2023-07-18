@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -33,6 +34,7 @@ class ProductsController extends Controller
             'description' => ['required', 'max:255'],
             'price' => ['required', 'numeric'],
             'deliveryDate' => ['required', 'date'],
+            'productFile' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         $product = new Product();
@@ -40,8 +42,15 @@ class ProductsController extends Controller
         $product->description = $validatedData['description'];
         $product->price = $validatedData['price'];
         $product->date = $validatedData['deliveryDate'];
-        $product->fileType = isset($_FILES["file"]["name"]) ? pathinfo($_FILES["file"]["name"])['extension'] : 'png';
+        $product->fileType = $request->file('productFile')->getClientOriginalExtension();
         $product->save();
+
+        if($request->hasFile('productFile')){
+            $file = $request->file('productFile');
+            Storage::put('public/productImages/' . $product->uuid, $file);
+
+            return redirect('products/list/')->with('message', 'Product has been saved with picture!');
+        }
 
         return redirect('products/list/')->with('message', 'Product has been saved!');
     }
@@ -60,9 +69,19 @@ class ProductsController extends Controller
             'description' => ['required', 'max:255'],
             'price' => ['required', 'numeric'],
             'deliveryDate' => ['required', 'date'],
+            'productFile' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
         $product->update($validatedData);
+
+        if($request->hasFile('productFile')){
+            $dir = 'public/productImages/' . $product->uuid;
+            Storage::deleteDirectory($dir);
+            $file = $request->file('productFile');
+            Storage::put($dir, $file);
+
+            return redirect('products/list/')->with('message', 'Product has been saved with picture!');
+        }
 
         return redirect('products/list')->with('message', 'Product has been updated!');
     }
