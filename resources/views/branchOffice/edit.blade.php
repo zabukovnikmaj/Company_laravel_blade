@@ -22,7 +22,7 @@
             </div>
         @endif
 
-        <form action="/branchOffice/create" method="POST">
+        <form action="{{ isset($filteredData['uuid']) ? '/branchOffice/edit/' . $filteredData['uuid'] : '/branchOffice/create' }}"  method="POST">
             @csrf
             @if(isset($filteredData['name']))
                 @method('PUT')

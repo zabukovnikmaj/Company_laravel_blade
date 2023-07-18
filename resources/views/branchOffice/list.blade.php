@@ -11,6 +11,11 @@
 
 <div class="container">
     <h1>Branch offices information</h1>
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <p>

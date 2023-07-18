@@ -11,6 +11,11 @@
 
 <div class="container">
     <h1>Products information</h1>
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <a href="{{ url('/products/create') }}" class="btn btn-primary">New product</a>
     <a href="{{ url('/') }}" class="btn btn-default">Back</a>
 

@@ -28,14 +28,14 @@
                 </div>
             @endif
 
-            <form action="/employees/create" method="POST">
+            <form action="{{ isset($filteredData['uuid']) ? '/employees/edit/' . $filteredData['uuid'] : '/employees/create' }}" method="POST">
                 @csrf
                 @if(isset($filteredData['name']))
                     @method('PUT')
                 @endif
 
                 <div class="form-group">
-                    <label for="branchOffice">Branch office name</label><br>
+                    <label for="branch_office">Branch office name</label><br>
                     @include('partials.branchNameRadioButtons', [
                         'branchOffices' => $branchOffices,
                         'existingBranchOffice' => $filteredData['branchOffice']
