@@ -12,9 +12,32 @@ class Product extends Model
     use HasUuids;
     use HasFactory;
 
+    /**
+     * PK does not increment
+     *
+     * @var bool
+     */
     public $incrementing = false;
+
+    /**
+     * Specifies PK data type
+     *
+     * @var string
+     */
     public $keyType = 'string';
+
+    /**
+     * Specifies name of PK
+     *
+     * @var string
+     */
     protected $primaryKey = 'uuid';
+
+    /**
+     * Defines fillable parameters
+     *
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'description',
@@ -23,6 +46,11 @@ class Product extends Model
         'fileType'
     ];
 
+    /**
+     * Gets branch office associated with product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function branchOffice()
     {
         return $this->belongsToMany(BranchOffice::class, 'BranchOfficeProduct', 'productId', 'branchOfficeId');

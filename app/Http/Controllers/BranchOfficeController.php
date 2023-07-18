@@ -30,6 +30,13 @@ class BranchOfficeController extends Controller
         ]);
     }
 
+    /**
+     * Display existing data into form
+     *
+     * @param Request $request
+     * @param BranchOffice $branchOffice
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function edit(Request $request, BranchOffice $branchOffice)
     {
         return view('branchOffice.edit', [
@@ -39,6 +46,12 @@ class BranchOfficeController extends Controller
         ]);
     }
 
+    /**
+     * Creates new entry into database and validates data
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save(Request $request)
     {
         $validatedData = $request->validate([
@@ -62,6 +75,13 @@ class BranchOfficeController extends Controller
         return redirect('branchOffice/list/')->with('message', 'Branch office has been saved!');
     }
 
+    /**
+     * Deletes specific entry
+     *
+     * @param Request $request
+     * @param BranchOffice $branchOffice
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete(Request $request, BranchOffice $branchOffice)
     {
         $branchOffice->delete();
@@ -69,6 +89,13 @@ class BranchOfficeController extends Controller
         return redirect('branchOffice/list')->with('message', 'Branch office has been deleted!');
     }
 
+    /**
+     * Updates changed data of branch office
+     *
+     * @param Request $request
+     * @param BranchOffice $branchOffice
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request, BranchOffice $branchOffice)
     {
         $validatedData = $request->validate([

@@ -14,8 +14,14 @@ use App\Http\Controllers;
 |
 */
 
+/**
+ * Route for the homepage
+ */
 Route::get('/', [Controllers\Controller::class, 'index']);
 
+/**
+ * All the routes for branch office (GET, POST, PUT, DELETE)
+ */
 Route::prefix('branchOffice')->group(function () {
     Route::get('/list', [Controllers\BranchOfficeController::class, 'list']);
     Route::get('/create', [Controllers\BranchOfficeController::class, 'edit']);
@@ -25,6 +31,9 @@ Route::prefix('branchOffice')->group(function () {
     Route::delete('/delete/{branchOffice}', [Controllers\BranchOfficeController::class, 'delete']);
 });
 
+/**
+ * All the routes for products (GET, POST, PUT, DELETE)
+ */
 Route::prefix('products')->group(function () {
     Route::get('/list', [Controllers\ProductsController::class, 'list']);
     Route::get('/create', [Controllers\ProductsController::class, 'edit']);
@@ -35,6 +44,9 @@ Route::prefix('products')->group(function () {
     Route::get('/storage/{product}', [Controllers\ProductsController::class, 'image']);
 });
 
+/**
+ * All the routes for employees (GET, POST, PUT, DELETE)
+ */
 Route::prefix('employees')->group(function () {
     Route::get('/list', [Controllers\EmployeesController::class, 'list']);
     Route::get('/create', [Controllers\EmployeesController::class, 'edit']);

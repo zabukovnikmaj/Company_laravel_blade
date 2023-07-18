@@ -14,12 +14,20 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
-    public function list() {
+    public function list()
+    {
         return view('products.list', [
             'products' => Product::all(),
         ]);
     }
 
+    /**
+     * Displays existing data into form
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function edit(Request $request, Product $product)
     {
         return view('products.edit', [
@@ -27,6 +35,12 @@ class ProductsController extends Controller
         ]);
     }
 
+    /**
+     * Saves and validates new product entry. Also handles file upload
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save(Request $request)
     {
         $validatedData = $request->validate([
@@ -45,7 +59,7 @@ class ProductsController extends Controller
         $product->fileType = $request->file('productFile')->getClientOriginalExtension();
         $product->save();
 
-        if($request->hasFile('productFile')){
+        if ($request->hasFile('productFile')) {
             $file = $request->file('productFile');
             Storage::put('public/productImages/' . $product->uuid, $file);
 
@@ -55,13 +69,30 @@ class ProductsController extends Controller
         return redirect('products/list/')->with('message', 'Product has been saved!');
     }
 
+    /**
+     * Deletes specific product and corresponding picture
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete(Request $request, Product $product)
     {
         $product->delete();
 
+        $dir = 'public/productImages/' . $product->uuid;
+        Storage::deleteDirectory($dir);
+
         return redirect('products/list')->with('message', 'Product has been deleted!');
     }
 
+    /**
+     * Updates and validates new product data. Also takes care of new image upload
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
@@ -74,7 +105,7 @@ class ProductsController extends Controller
 
         $product->update($validatedData);
 
-        if($request->hasFile('productFile')){
+        if ($request->hasFile('productFile')) {
             $dir = 'public/productImages/' . $product->uuid;
             Storage::deleteDirectory($dir);
             $file = $request->file('productFile');

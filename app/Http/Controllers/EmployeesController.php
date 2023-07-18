@@ -28,6 +28,13 @@ class EmployeesController extends Controller
         ]);
     }
 
+    /**
+     * Displays existing data into form
+     *
+     * @param Request $request
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function edit(Request $request, Employee $employee)
     {
         return view('employees.edit', [
@@ -36,6 +43,12 @@ class EmployeesController extends Controller
         ]);
     }
 
+    /**
+     * Saves new employee and validates data
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save(Request $request)
     {
         $validatedData = $request->validate([
@@ -59,6 +72,13 @@ class EmployeesController extends Controller
         return redirect('employees/list/')->with('message', 'Employee has been saved!');
     }
 
+    /**
+     * Deletes specific employee
+     *
+     * @param Request $request
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete(Request $request, Employee $employee)
     {
         $employee->delete();
@@ -66,6 +86,13 @@ class EmployeesController extends Controller
         return redirect('employees/list')->with('message', 'Employee has been deleted!');
     }
 
+    /**
+     * Updates data about existing employee
+     *
+     * @param Request $request
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request, Employee $employee)
     {
         $validatedData = $request->validate([
