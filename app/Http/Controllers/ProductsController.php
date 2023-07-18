@@ -43,13 +43,27 @@ class ProductsController extends Controller
         $product->fileType = isset($_FILES["file"]["name"]) ? pathinfo($_FILES["file"]["name"])['extension'] : 'png';
         $product->save();
 
-        return redirect('products/list/');
+        return redirect('products/list/')->with('message', 'Product has been saved!');
     }
 
     public function delete(Request $request, Product $product)
     {
         $product->delete();
 
-        return redirect('products/list');
+        return redirect('products/list')->with('message', 'Product has been deleted!');
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:60'],
+            'description' => ['required', 'max:255'],
+            'price' => ['required', 'numeric'],
+            'deliveryDate' => ['required', 'date'],
+        ]);
+
+        $product->update($validatedData);
+
+        return redirect('products/list')->with('message', 'Product has been updated!');
     }
 }

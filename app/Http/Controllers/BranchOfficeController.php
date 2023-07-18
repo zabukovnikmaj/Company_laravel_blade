@@ -50,13 +50,26 @@ class BranchOfficeController extends Controller
             $branchOfficeProduct->save();
         }
 
-        return redirect('branchOffice/list/');
+        return redirect('branchOffice/list/')->with('message', 'Branch office has been saved!');
     }
 
     public function delete(Request $request, BranchOffice $branchOffice)
     {
         $branchOffice->delete();
 
-        return redirect('branchOffice/list');
+        return redirect('branchOffice/list')->with('message', 'Branch office has been deleted!');
+    }
+
+    public function update(Request $request, BranchOffice $branchOffice)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:60'],
+            'address' => ['required', 'max:60'],
+            'products' => ['required'],
+        ]);
+
+        $branchOffice->update($validatedData);
+
+        return redirect('branchOffice/list')->with('message', 'Branch office has been updated!');
     }
 }

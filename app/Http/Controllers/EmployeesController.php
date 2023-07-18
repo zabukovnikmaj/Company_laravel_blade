@@ -14,11 +14,13 @@ class EmployeesController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
-    public function list() {
+    public function list()
+    {
         return view('employees.list', [
             'employees' => Employee::all(),
         ]);
     }
+
     public function edit(Request $request, Employee $employee)
     {
         return view('employees.edit', [
@@ -31,7 +33,7 @@ class EmployeesController extends Controller
     public function save(Request $request)
     {
         $validatedData = $request->validate([
-            'branchOffice' => ['required'],
+            'branch_office' => ['required'],
             'name' => ['required', 'max:60'],
             'position' => ['required', 'max:60'],
             'age' => ['required', 'numeric', 'min:18', 'max:100'],
@@ -48,13 +50,29 @@ class EmployeesController extends Controller
         $employee->email = $validatedData['email'];
         $employee->save();
 
-        return redirect('employees/list/');
+        return redirect('employees/list/')->with('message', 'Employee has been saved!');
     }
 
     public function delete(Request $request, Employee $employee)
     {
         $employee->delete();
 
-        return redirect('employees/list');
+        return redirect('employees/list')->with('message', 'Employee has been deleted!');
+    }
+
+    public function update(Request $request, Employee $employee)
+    {
+        $validatedData = $request->validate([
+            'branch_office' => ['required'],
+            'name' => ['required', 'max:60'],
+            'position' => ['required', 'max:60'],
+            'age' => ['required', 'numeric', 'min:18', 'max:100'],
+            'sex' => ['required', Rule::in(['m', 'f'])],
+            'email' => ['required', 'email:rfc,dns'],
+        ]);
+
+        $employee->update($validatedData);
+
+        return redirect('employees/list')->with('message', 'Employee has been updated!');
     }
 }
