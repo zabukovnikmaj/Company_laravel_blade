@@ -38,7 +38,7 @@
                     <label for="branch_office">Branch office name</label><br>
                     @include('partials.branchNameRadioButtons', [
                         'branchOffices' => $branchOffices,
-                        'existingBranchOffice' => $filteredData['branchOffice']
+                        'existingBranchOffice' => $filteredData->branchOffice
                     ])
                     @include('partials.errors', [
                         'err' => $err['branchOffice'] ?? null

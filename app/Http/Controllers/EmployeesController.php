@@ -33,7 +33,6 @@ class EmployeesController extends Controller
         return view('employees.edit', [
             'filteredData' => $employee,
             'branchOffices' => BranchOffice::all(),
-            'existingBranchOffice' => null,
         ]);
     }
 
