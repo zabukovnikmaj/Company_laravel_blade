@@ -19,10 +19,14 @@ return new class extends Migration
 
             $table->foreign('branch_office_uuid')
                 ->references('uuid')
-                ->on('BranchOffice');
+                ->on('BranchOffice')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreign('product_uuid')
                 ->references('uuid')
-                ->on('Products');
+                ->on('Products')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

@@ -23,7 +23,9 @@ return new class extends Migration
 
             $table->foreign('branch_office')
                 ->references('uuid')
-                ->on('BranchOffice');
+                ->on('BranchOffice')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
