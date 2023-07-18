@@ -15,6 +15,10 @@ class BranchOfficeProduct extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
+    protected $fillable = [
+        'branch_office_uuid',
+        'product_uuid',
+    ];
 
     public function branchOffice()
     {

@@ -18,6 +18,10 @@ class BranchOffice extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
+    protected $fillable = [
+        'name',
+        'address',
+    ];
 
     /**
      * Get all employees of one branch office

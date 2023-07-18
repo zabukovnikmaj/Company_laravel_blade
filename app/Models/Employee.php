@@ -16,6 +16,14 @@ class Employee extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
+    protected $fillable = [
+        'name',
+        'position',
+        'age',
+        'sex',
+        'email',
+        'branch_office',
+    ];
 
     /**
      * Get branch office that employs employee

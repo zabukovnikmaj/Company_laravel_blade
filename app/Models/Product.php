@@ -15,6 +15,13 @@ class Product extends Model
     public $incrementing = false;
     public $keyType = 'string';
     protected $primaryKey = 'uuid';
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'date',
+        'fileType'
+    ];
 
     public function branchOffice()
     {
