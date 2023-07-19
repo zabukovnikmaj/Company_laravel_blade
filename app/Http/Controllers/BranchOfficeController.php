@@ -90,7 +90,7 @@ class BranchOfficeController extends Controller
     }
 
     /**
-     * Updates changed data of branch office
+     * Updates changed data of branch office and products of branch office
      *
      * @param Request $request
      * @param BranchOffice $branchOffice
@@ -105,6 +105,14 @@ class BranchOfficeController extends Controller
         ]);
 
         $branchOffice->update($validatedData);
+
+        BranchOfficeProduct::where('branch_office_uuid', $branchOffice->uuid)->delete();
+        foreach ($validatedData['products'] as $product) {
+            $branchOfficeProduct = new BranchOfficeProduct();
+            $branchOfficeProduct->branch_office_uuid = $branchOffice->uuid;
+            $branchOfficeProduct->product_uuid = $product;
+            $branchOfficeProduct->save();
+        }
 
         return redirect('branchOffice/list')->with('message', 'Branch office has been updated!');
     }
