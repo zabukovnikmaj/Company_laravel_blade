@@ -30,7 +30,7 @@
         <div class="form-group">
             <label for="name">Product name</label><br>
             <input type="text" class="form-control" name="name"
-                   value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
+                   value="{{ isset($filteredData['name']) ? $filteredData['name'] : '' }}">
             @include('partials.errors', [
                 'err' => $err['name'] ?? null
             ])
@@ -39,7 +39,7 @@
         <div class="form-group">
             <label for="description">Product description</label><br>
             <textarea class="form-control" name="description" cols="50"
-                      rows="4">{{ old('description', isset($filteredData['description']) ? $filteredData['description'] : '') }}</textarea>
+                      rows="4">{{ isset($filteredData['description']) ? $filteredData['description'] : '' }}</textarea>
             @include('partials.errors', [
                 'err' => $err['description'] ?? null
             ])
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label for="price">Product price</label><br>
             <input type="number" class="form-control" name="price" step="0.01" min="0" max="10000"
-                   value="{{ old('price', isset($filteredData['price']) ? $filteredData['price'] : '') }}">
+                   value="{{ isset($filteredData['price']) ? $filteredData['price'] : '' }}">
             @include('partials.errors', [
                 'err' => $err['price'] ?? null
             ])
@@ -57,7 +57,7 @@
         <div class="form-group">
             <label for="deliveryDate">Product delivery date</label><br>
             <input type="date" class="form-control" name="deliveryDate"
-                   value="{{ old('deliveryDate', isset($filteredData['date']) ? $filteredData['date'] : '') }}">
+                   value="{{ isset($filteredData['date']) ? $filteredData['date'] : '' }}">
             @include('partials.errors', [
                 'err' => $err['deliveryDate'] ?? null
             ])

@@ -30,7 +30,7 @@
         <div class="form-group">
             <label for="name">Branch name</label>
             <input type="text" class="form-control {{ isset($err['name']) ? 'is-invalid' : '' }}" name="name"
-                   value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
+                   value="{{ isset($filteredData['name']) ? $filteredData['name'] : '' }}">
             @include('partials.errors', [
                 'err' => $err['name'] ?? null
             ])
@@ -39,7 +39,7 @@
         <div class="form-group">
             <label for="address">Branch address</label>
             <input type="text" class="form-control {{ isset($err['address']) ? 'is-invalid' : '' }}" name="address"
-                   value="{{ old('address', isset($filteredData['address']) ? $filteredData['address'] : '') }}">
+                   value="{{ isset($filteredData['address']) ? $filteredData['address'] : '' }}">
             @include('partials.errors', [
                 'err' => $err['address'] ?? null
             ])

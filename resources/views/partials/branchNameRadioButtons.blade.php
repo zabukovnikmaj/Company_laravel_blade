@@ -1,8 +1,8 @@
 @if(isset($branchOffices) && !empty($branchOffices))
     @foreach($branchOffices as $branchOffice)
         <label>
-            <input type="radio" name="branch_office" value="{{ htmlspecialchars($branchOffice->uuid) }}"
-                {{ ($existingBranchOffice->uuid === $branchOffice->uuid) ? 'checked' : '' }}>
+            <input type="radio" name="branch_office" value="{{ $branchOffice->uuid }}"
+                {{ ($existingBranchOfficeUuid === $branchOffice->uuid) ? 'checked' : '' }}>
             {{ $branchOffice->name }}
         </label> <br>
     @endforeach

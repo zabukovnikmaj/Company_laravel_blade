@@ -38,7 +38,7 @@
                     <label for="branch_office">Branch office name</label><br>
                     @include('partials.branchNameRadioButtons', [
                         'branchOffices' => $branchOffices,
-                        'existingBranchOffice' => $filteredData->branchOffice
+                        'existingBranchOfficeUuid' => isset($filteredData->branchOffice->uuid) ? $filteredData->branchOffice->uuid : ''
                     ])
                     @include('partials.errors', [
                         'err' => $err['branchOffice'] ?? null
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label for="name">Employee name</label><br>
                     <input type="text" class="form-control" name="name"
-                           value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
+                           value="{{ isset($filteredData['name']) ? $filteredData['name'] : '' }}">
                     @include('partials.errors', [
                         'err' => $err['name'] ?? null
                     ])
@@ -57,7 +57,7 @@
                 <div class="form-group">
                     <label for="position">Employee position</label><br>
                     <input type="text" class="form-control" name="position"
-                           value="{{ old('position', isset($filteredData['position']) ? $filteredData['position'] : '') }}">
+                           value="{{ isset($filteredData['position']) ? $filteredData['position'] : '' }}">
                     @include('partials.errors', [
                         'err' => $err['position'] ?? null
                     ])
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label for="age">Employee age</label><br>
                     <input type="number" class="form-control" name="age" step="1" min="15" max="100"
-                           value="{{ old('age', isset($filteredData['age']) ? $filteredData['age'] : '') }}">
+                           value="{{ isset($filteredData['age']) ? $filteredData['age'] : '' }}">
                     @include('partials.errors', [
                         'err' => $err['age'] ?? null
                     ])
@@ -87,7 +87,7 @@
                     <label for="email">Employee email</label>
                     <input type="email" class="form-control"
                            name="email"
-                           value="{{ old('email', isset($filteredData['email']) ? $filteredData['email'] : '') }}">
+                           value="{{ isset($filteredData['email']) ? $filteredData['email'] : '' }}">
                     @include('partials.errors', [
                         'err' => $err['email'] ?? null
                     ])
