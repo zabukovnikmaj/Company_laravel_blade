@@ -72,7 +72,7 @@ class BranchOfficeController extends Controller
             $branchOfficeProduct->save();
         }
 
-        return redirect('branchOffice/list/')->with('message', 'Branch office has been saved!');
+        return redirect('branchOffice/list/')->with('message', 'Branch office has been saved!')->withErrors($validatedData);
     }
 
     /**

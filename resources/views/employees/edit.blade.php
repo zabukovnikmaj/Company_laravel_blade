@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        .alert {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 @extends('partials.navBar');
@@ -18,16 +23,6 @@
     @endphp
     <div class="row">
         <div class="col-md-12">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <form action="{{ isset($filteredData['uuid']) ? '/employees/edit/' . $filteredData['uuid'] : '/employees/create' }}" method="POST">
                 @csrf
                 @if(isset($filteredData['name']))
@@ -40,36 +35,36 @@
                         'branchOffices' => $branchOffices,
                         'existingBranchOfficeUuid' => isset($filteredData->branchOffice->uuid) ? $filteredData->branchOffice->uuid : ''
                     ])
-                    @include('partials.errors', [
-                        'err' => $err['branchOffice'] ?? null
-                    ])
+                    @error('branch_office')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="name">Employee name</label><br>
                     <input type="text" class="form-control" name="name"
                            value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
-                    @include('partials.errors', [
-                        'err' => $err['name'] ?? null
-                    ])
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="position">Employee position</label><br>
                     <input type="text" class="form-control" name="position"
                            value="{{ old('position', isset($filteredData['position']) ? $filteredData['position'] : '') }}">
-                    @include('partials.errors', [
-                        'err' => $err['position'] ?? null
-                    ])
+                    @error('position')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="age">Employee age</label><br>
                     <input type="number" class="form-control" name="age" step="1" min="15" max="100"
                            value="{{ old('age', isset($filteredData['age']) ? $filteredData['age'] : '') }}">
-                    @include('partials.errors', [
-                        'err' => $err['age'] ?? null
-                    ])
+                    @error('age')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -78,9 +73,9 @@
                     <label for="male">Male</label><br>
                     <input type="radio" name="sex" value="f" {{ $filteredData['sex'] === 'f' ? 'checked' : '' }}>
                     <label for="female">Female</label>
-                    @include('partials.errors', [
-                        'err' => $err['sex'] ?? null
-                    ])
+                    @error('sex')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -88,9 +83,9 @@
                     <input type="email" class="form-control"
                            name="email"
                            value="{{ old('email', isset($filteredData['email']) ? $filteredData['email'] : '') }}">
-                    @include('partials.errors', [
-                        'err' => $err['email'] ?? null
-                    ])
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>

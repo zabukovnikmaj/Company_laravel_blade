@@ -9,7 +9,7 @@
         <label>
             <input type="checkbox" name="products[]" value="{{ $product->uuid }}"
                 {{ in_array($product->uuid, $productsData) ? 'checked' : '' }}>
-            {{ htmlspecialchars($product['name']) }}
+            {{ $product['name'] }}
         </label><br>
     @endforeach
 @else
