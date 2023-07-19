@@ -70,7 +70,14 @@
                 'err' => $err['productFile'] ?? null
             ])
             <br>
-            <img src="/products/images/{{ $filteredData['uuid'] }}"
+
+            @php
+                $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $filteredData->uuid);
+                if(count($filename) === 0){
+                    $filename = [''];
+                }
+            @endphp
+            <img src="{{ \Illuminate\Support\Facades\Storage::url($filename[0]) }}"
                  alt="Product picture has not been uploaded yet!" style="max-width: 300px; max-height: 300px">
         </div>
 
