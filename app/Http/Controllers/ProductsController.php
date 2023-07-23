@@ -18,6 +18,7 @@ class ProductsController extends Controller
     {
         return view('products.list', [
             'products' => Product::all(),
+            'title' => 'List products',
         ]);
     }
 
@@ -32,6 +33,7 @@ class ProductsController extends Controller
     {
         return view('products.edit', [
             'filteredData' => $product,
+            'title' => 'Edit product',
         ]);
     }
 

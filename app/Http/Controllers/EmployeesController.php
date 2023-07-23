@@ -25,6 +25,7 @@ class EmployeesController extends Controller
 
         return view('employees.list', [
             'employees' => $employees,
+            'title' => 'List employees',
         ]);
     }
 
@@ -40,6 +41,7 @@ class EmployeesController extends Controller
         return view('employees.edit', [
             'filteredData' => $employee,
             'branchOffices' => BranchOffice::all(),
+            'title' => 'Edit employee',
         ]);
     }
 

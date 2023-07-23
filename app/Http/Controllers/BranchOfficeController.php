@@ -27,6 +27,7 @@ class BranchOfficeController extends Controller
 
         return view('branchOffice.list', [
             'branchOffices' => $branchOffices,
+            'title' => 'List branch offices',
         ]);
     }
 
@@ -43,6 +44,7 @@ class BranchOfficeController extends Controller
             'filteredData' => $branchOffice,
             'products' => Product::all(),
             'productsData' => $branchOffice->products->pluck('uuid')->toArray(),
+            'title' => 'Edit branch office',
         ]);
     }
 
