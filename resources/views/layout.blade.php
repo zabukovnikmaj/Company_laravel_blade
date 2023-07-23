@@ -9,6 +9,12 @@
         .alert {
             margin-top: 10px;
         }
+        body {
+            padding-top: 40px;
+        }
+        .navbar.navbar-fixed-top {
+            height: 40px;
+        }
     </style>
 </head>
 <body>
