@@ -4,10 +4,10 @@
     <h1>Enter information about the branch office</h1>
     <div class="col-md-12">
         <form
-            action="{{ isset($filteredData['uuid']) ? '/branchOffice/edit/' . $filteredData['uuid'] : '/branchOffice/create' }}"
+            action="{{ isset($existingData->uuid) ? '/branchOffice/edit/' . $existingData['uuid'] : '/branchOffice/create' }}"
             method="POST">
             @csrf
-            @if(isset($filteredData['name']))
+            @if(isset($existingData['name']))
                 @method('PUT')
             @endif
 
@@ -15,14 +15,14 @@
                 name="name"
                 displayedName="Branch office"
                 type="text"
-                value="{{ $filteredData?->name }}"
+                value="{{ $existingData?->name }}"
             ></x-input>
 
             <x-input
                 name="address"
                 displayedName="Branch office address"
                 type="text"
-                value="{{ $filteredData?->address }}"
+                value="{{ $existingData?->address }}"
             ></x-input>
 
             <div class="form-group">

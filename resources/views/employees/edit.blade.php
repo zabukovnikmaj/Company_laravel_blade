@@ -9,9 +9,11 @@
     @endphp
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ isset($filteredData['uuid']) ? '/employees/edit/' . $filteredData['uuid'] : '/employees/create' }}" method="POST">
+            <form
+                action="{{ isset($existingData['uuid']) ? '/employees/edit/' . $existingData['uuid'] : '/employees/create' }}"
+                method="POST">
                 @csrf
-                @if(isset($filteredData['name']))
+                @if(isset($existingData['name']))
                     @method('PUT')
                 @endif
 
@@ -19,7 +21,7 @@
                     <label for="branch_office">Branch office name</label><br>
                     @include('partials.branchNameRadioButtons', [
                         'branchOffices' => $branchOffices,
-                        'existingBranchOfficeUuid' => isset($filteredData->branchOffice->uuid) ? $filteredData->branchOffice->uuid : ''
+                        'existingBranchOfficeUuid' => isset($existingData->branchOffice->uuid) ? $existingData->branchOffice->uuid : ''
                     ])
                     @error('branch_office')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -30,28 +32,28 @@
                     name="name"
                     displayedName="Employee name"
                     type="text"
-                    value="{{ $filteredData?->name }}"
+                    value="{{ $existingData?->name }}"
                 ></x-input>
 
                 <x-input
                     name="position"
                     displayedName="Employee position"
                     type="text"
-                    value="{{ $filteredData?->position }}"
+                    value="{{ $existingData?->position }}"
                 ></x-input>
 
                 <x-input
                     name="age"
                     displayedName="Employee age"
                     type="number"
-                    value="{{ $filteredData?->age }}"
+                    value="{{ $existingData?->age }}"
                 ></x-input>
 
                 <div class="form-group">
                     <label>Employee sex</label><br>
-                    <input type="radio" name="sex" value="m" {{ $filteredData?->sex === 'm' ? 'checked' : '' }}>
+                    <input type="radio" name="sex" value="m" {{ $existingData?->sex === 'm' ? 'checked' : '' }}>
                     <label for="male">Male</label><br>
-                    <input type="radio" name="sex" value="f" {{ $filteredData?->sex === 'f' ? 'checked' : '' }}>
+                    <input type="radio" name="sex" value="f" {{ $existingData?->sex === 'f' ? 'checked' : '' }}>
                     <label for="female">Female</label>
                     @error('sex')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -63,7 +65,7 @@
                     name="email"
                     displayedName="Employee email"
                     type="email"
-                    value="{{ $filteredData?->email }}"
+                    value="{{ $existingData?->email }}"
                 ></x-input>
 
                 <button type="submit" class="btn btn-primary">Save</button>

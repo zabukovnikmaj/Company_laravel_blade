@@ -32,7 +32,7 @@ class ProductsController extends Controller
     public function edit(Request $request, Product $product)
     {
         return view('products.edit', [
-            'filteredData' => $product,
+            'existingData' => $product,
             'title' => 'Edit product',
         ]);
     }

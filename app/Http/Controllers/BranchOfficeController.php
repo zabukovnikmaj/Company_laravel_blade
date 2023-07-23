@@ -41,7 +41,7 @@ class BranchOfficeController extends Controller
     public function edit(Request $request, BranchOffice $branchOffice)
     {
         return view('branchOffice.edit', [
-            'filteredData' => $branchOffice,
+            'existingData' => $branchOffice,
             'products' => Product::all(),
             'productsData' => $branchOffice->products->pluck('uuid')->toArray(),
             'title' => 'Edit branch office',

@@ -39,7 +39,7 @@ class EmployeesController extends Controller
     public function edit(Request $request, Employee $employee)
     {
         return view('employees.edit', [
-            'filteredData' => $employee,
+            'existingData' => $employee,
             'branchOffices' => BranchOffice::all(),
             'title' => 'Edit employee',
         ]);

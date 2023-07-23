@@ -2,9 +2,10 @@
 
 @section('content')
     <h1>Enter information about the products</h1>
-    <form action="{{ isset($filteredData['uuid']) ? '/products/edit/' . $filteredData['uuid'] : '/products/create' }}"  method="POST" enctype="multipart/form-data">
+    <form action="{{ isset($existingData['uuid']) ? '/products/edit/' . $existingData['uuid'] : '/products/create' }}"
+          method="POST" enctype="multipart/form-data">
         @csrf
-        @if(isset($filteredData['name']))
+        @if(isset($existingData['name']))
             @method('PUT')
         @endif
 
@@ -12,13 +13,13 @@
             name="name"
             displayedName="Product name"
             type="text"
-            value="{{ $filteredData?->name }}"
+            value="{{ $existingData?->name }}"
         ></x-input>
 
         <div class="form-group">
             <label for="description">Product description</label><br>
             <textarea class="form-control" name="description" cols="50"
-                      rows="4">{{ old('description', $filteredData?->description) }}</textarea>
+                      rows="4">{{ old('description', $existingData?->description) }}</textarea>
             @error('description')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -28,14 +29,14 @@
             name="price"
             displayedName="Product price"
             type="number"
-            value="{{ $filteredData?->price }}"
+            value="{{ $existingData?->price }}"
         ></x-input>
 
         <x-input
             name="deliveryDate"
             displayedName="Product delivery date"
             type="date"
-            value="{{ $filteredData?->date }}"
+            value="{{ $existingData?->date }}"
         ></x-input>
 
         <div class="form-group">
@@ -47,7 +48,7 @@
             <br>
 
             @php
-                $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $filteredData->uuid);
+                $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $existingData->uuid);
                 if(count($filename) === 0){
                     $filename = [''];
                 }
