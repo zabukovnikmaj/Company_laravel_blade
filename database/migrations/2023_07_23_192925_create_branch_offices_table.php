@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('BranchOffice', function (Blueprint $table) {
-            $table->string('uuid')->primary();
+        Schema::create('branch_offices', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('address');
             $table->timestamps();
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('BranchOffice');
+        Schema::dropIfExists('branch_offices');
     }
 };

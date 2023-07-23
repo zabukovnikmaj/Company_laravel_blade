@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Employees', function (Blueprint $table) {
-            $table->string('uuid')->primary();
-            $table->string('branch_office');
+        Schema::create('employees', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('branch_office_id');
             $table->string('name');
             $table->string('position');
             $table->integer('age');
@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('email');
             $table->timestamps();
 
-            $table->foreign('branch_office')
-                ->references('uuid')
-                ->on('BranchOffice')
+            $table->foreign('branch_office_id')
+                ->references('id')
+                ->on('branch_offices')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Employees');
+        Schema::dropIfExists('employees');
     }
 };

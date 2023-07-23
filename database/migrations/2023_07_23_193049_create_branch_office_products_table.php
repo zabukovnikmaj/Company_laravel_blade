@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('BranchOfficeProduct', function (Blueprint $table) {
-            $table->string('uuid')->primary();
-            $table->string('branch_office_uuid');
-            $table->string('product_uuid');
+        Schema::create('branch_office_products', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('branch_office_id');
+            $table->uuid('product_id');
             $table->timestamps();
 
-            $table->foreign('branch_office_uuid')
-                ->references('uuid')
-                ->on('BranchOffice')
+            $table->foreign('branch_office_id')
+                ->references('id')
+                ->on('branch_offices')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('product_uuid')
-                ->references('uuid')
-                ->on('Products')
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('BranchOfficeProduct');
+        Schema::dropIfExists('branch_office_products');
     }
 };
