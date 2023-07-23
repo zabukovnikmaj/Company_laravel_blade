@@ -7,41 +7,36 @@
         @if(isset($filteredData['name']))
             @method('PUT')
         @endif
-        <div class="form-group">
-            <label for="name">Product name</label><br>
-            <input type="text" class="form-control" name="name"
-                   value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
-            @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
+
+        <x-input
+            name="name"
+            displayedName="Product name"
+            type="text"
+            value="{{ $filteredData?->name }}"
+        ></x-input>
 
         <div class="form-group">
             <label for="description">Product description</label><br>
             <textarea class="form-control" name="description" cols="50"
-                      rows="4">{{ old('description', isset($filteredData['description']) ? $filteredData['description'] : '') }}</textarea>
+                      rows="4">{{ old('description', $filteredData?->description) }}</textarea>
             @error('description')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="price">Product price</label><br>
-            <input type="number" class="form-control" name="price" step="0.01" min="0" max="10000"
-                   value="{{ old('price', isset($filteredData['price']) ? $filteredData['price'] : '') }}">
-            @error('price')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
+        <x-input
+            name="price"
+            displayedName="Product price"
+            type="number"
+            value="{{ $filteredData?->price }}"
+        ></x-input>
 
-        <div class="form-group">
-            <label for="deliveryDate">Product delivery date</label><br>
-            <input type="date" class="form-control" name="deliveryDate"
-                   value="{{ old('date', isset($filteredData['date']) ? $filteredData['date'] : '') }}">
-            @error('deliveryDate')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-        </div>
+        <x-input
+            name="deliveryDate"
+            displayedName="Product delivery date"
+            type="date"
+            value="{{ $filteredData?->date }}"
+        ></x-input>
 
         <div class="form-group">
             <label for="productFile">Product picture</label><br>

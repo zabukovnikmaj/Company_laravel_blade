@@ -10,23 +10,20 @@
             @if(isset($filteredData['name']))
                 @method('PUT')
             @endif
-            <div class="form-group">
-                <label for="name">Branch name</label>
-                <input type="text" class="form-control {{ isset($err['name']) ? 'is-invalid' : '' }}" name="name"
-                       value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
-                @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
 
-            <div class="form-group">
-                <label for="address">Branch address</label>
-                <input type="text" class="form-control {{ isset($err['address']) ? 'is-invalid' : '' }}" name="address"
-                       value="{{ old('address', isset($filteredData['address']) ? $filteredData['address'] : '') }}">
-                @error('address')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
+            <x-input
+                name="name"
+                displayedName="Branch office"
+                type="text"
+                value="{{ $filteredData?->name }}"
+            ></x-input>
+
+            <x-input
+                name="address"
+                displayedName="Branch office address"
+                type="text"
+                value="{{ $filteredData?->address }}"
+            ></x-input>
 
             <div class="form-group">
                 <label for="products">Products name</label> <br>

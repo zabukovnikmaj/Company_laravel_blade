@@ -16,7 +16,6 @@ class Input extends Component
         public string $displayedName,
         public string $type,
         public string $value,
-        public string $errorMessage,
     )
     {
 

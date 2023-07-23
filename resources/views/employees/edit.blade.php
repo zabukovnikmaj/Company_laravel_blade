@@ -1,4 +1,3 @@
-
 @extends('layout')
 
 @section('content')
@@ -27,53 +26,45 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="name">Employee name</label><br>
-                    <input type="text" class="form-control" name="name"
-                           value="{{ old('name', isset($filteredData['name']) ? $filteredData['name'] : '') }}">
-                    @error('name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+                <x-input
+                    name="name"
+                    displayedName="Employee name"
+                    type="text"
+                    value="{{ $filteredData?->name }}"
+                ></x-input>
+
+                <x-input
+                    name="position"
+                    displayedName="Employee position"
+                    type="text"
+                    value="{{ $filteredData?->position }}"
+                ></x-input>
+
+                <x-input
+                    name="age"
+                    displayedName="Employee age"
+                    type="number"
+                    value="{{ $filteredData?->age }}"
+                ></x-input>
 
                 <div class="form-group">
-                    <label for="position">Employee position</label><br>
-                    <input type="text" class="form-control" name="position"
-                           value="{{ old('position', isset($filteredData['position']) ? $filteredData['position'] : '') }}">
-                    @error('position')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="age">Employee age</label><br>
-                    <input type="number" class="form-control" name="age" step="1" min="15" max="100"
-                           value="{{ old('age', isset($filteredData['age']) ? $filteredData['age'] : '') }}">
-                    @error('age')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label>Employee sex:</label><br>
-                    <input type="radio" name="sex" value="m" {{ $filteredData['sex'] === 'm' ? 'checked' : '' }}>
+                    <label>Employee sex</label><br>
+                    <input type="radio" name="sex" value="m" {{ $filteredData?->sex === 'm' ? 'checked' : '' }}>
                     <label for="male">Male</label><br>
-                    <input type="radio" name="sex" value="f" {{ $filteredData['sex'] === 'f' ? 'checked' : '' }}>
+                    <input type="radio" name="sex" value="f" {{ $filteredData?->sex === 'f' ? 'checked' : '' }}>
                     <label for="female">Female</label>
                     @error('sex')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Employee email</label>
-                    <input type="email" class="form-control"
-                           name="email"
-                           value="{{ old('email', isset($filteredData['email']) ? $filteredData['email'] : '') }}">
-                    @error('email')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+
+                <x-input
+                    name="email"
+                    displayedName="Employee email"
+                    type="email"
+                    value="{{ $filteredData?->email }}"
+                ></x-input>
 
                 <button type="submit" class="btn btn-primary">Save</button>
                 <a href="/employees/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
