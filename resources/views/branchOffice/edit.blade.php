@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Branch office form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <style>
-        .alert {
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-@extends('partials.navBar');
+@extends('layout')
 
-<div class="container mt-5">
+@section('content')
     <h1>Enter information about the branch office</h1>
     <div class="col-md-12">
         <form
@@ -56,8 +42,4 @@
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="/branchOffice/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
         </form>
-    </div>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection

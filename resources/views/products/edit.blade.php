@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <style>
-        .alert {
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-@extends('partials.navBar');
+@extends('layout')
 
-<div class="container">
+@section('content')
     <h1>Enter information about the products</h1>
     <form action="{{ isset($filteredData['uuid']) ? '/products/edit/' . $filteredData['uuid'] : '/products/create' }}"  method="POST" enctype="multipart/form-data">
         @csrf
@@ -78,9 +64,4 @@
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="/products/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
     </form>
-
-</div>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection

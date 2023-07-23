@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee form</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <style>
-        .alert {
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-@extends('partials.navBar');
 
-<div class="container">
+@extends('layout')
+
+@section('content')
     <h1>Enter information about the employee</h1>
     @php
         if (!isset($err)) {
@@ -93,8 +80,4 @@
             </form>
         </div>
     </div>
-</div>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection

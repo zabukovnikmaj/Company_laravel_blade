@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List products</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
-<body>
-@extends('partials.navBar');
 
-<div class="container">
+@extends('layout')
+
+@section('content')
     <h1>Products information</h1>
     @if (session('message'))
         <div class="alert alert-success">
@@ -40,10 +32,10 @@
                     <td>{{ $product['date'] }}</td>
                     <td>
                         @php
-                        $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $product->uuid);
-						if(count($filename) === 0){
-							$filename = [''];
-						}
+                            $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $product->uuid);
+                            if(count($filename) === 0){
+                                $filename = [''];
+                            }
                         @endphp
                         <img src="{{ Storage::url($filename[0]) }}" alt="product picture"
                              style="max-width: 300px; max-height: 300px">
@@ -68,8 +60,4 @@
         @endif
         </tbody>
     </table>
-</div>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+@endsection
