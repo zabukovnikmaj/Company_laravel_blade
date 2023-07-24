@@ -7,8 +7,8 @@
 @if (isset($products) && !empty($products))
     @foreach ($products as $product)
         <label>
-            <input type="checkbox" name="products[]" value="{{ $product->uuid }}"
-                {{ in_array($product->uuid, $productsData) ? 'checked' : '' }}>
+            <input type="checkbox" name="products[]" value="{{ $product->id }}"
+                {{ in_array($product->id, $productsData) ? 'checked' : '' }}>
             {{ $product['name'] }}
         </label><br>
     @endforeach

@@ -36,10 +36,10 @@
                             <td>{{ $employee->sex }}</td>
                             <td>{{ $employee->email }}</td>
                             <td>
-                                <form action="{{ url('/employees/delete', $employee->uuid) }}" method="POST">
+                                <form action="{{ url('/employees/delete', $employee->id) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ url('/employees/edit', $employee->uuid) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ url('/employees/edit', $employee->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
                                 </form>
                             </td>

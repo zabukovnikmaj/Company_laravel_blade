@@ -58,7 +58,7 @@ class ProductsController extends Controller
         $product->description = $validatedData['description'];
         $product->price = $validatedData['price'];
         $product->date = $validatedData['deliveryDate'];
-        $product->fileType = $request->file('productFile')->getClientOriginalExtension();
+        $product->file_type = $request->file('productFile')->getClientOriginalExtension();
         $product->save();
 
         if ($request->hasFile('productFile')) {

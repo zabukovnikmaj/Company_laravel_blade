@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -24,14 +25,7 @@ class Product extends Model
      *
      * @var string
      */
-    public $keyType = 'string';
-
-    /**
-     * Specifies name of PK
-     *
-     * @var string
-     */
-    protected $primaryKey = 'uuid';
+    public $keyType = 'uuid';
 
     /**
      * Defines fillable parameters
@@ -43,16 +37,16 @@ class Product extends Model
         'description',
         'price',
         'date',
-        'fileType'
+        'file_type',
     ];
 
     /**
      * Gets branch office associated with product
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function branchOffice()
+    public function branch_offices()
     {
-        return $this->belongsToMany(BranchOffice::class, 'BranchOfficeProduct', 'productId', 'branchOfficeId');
+        return $this->belongsToMany(BranchOffice::class, 'branch_office_products', 'product_id', 'branch_office_id');
     }
 }

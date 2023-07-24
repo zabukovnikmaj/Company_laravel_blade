@@ -2,21 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class BranchOfficeProduct extends Model
 {
     use HasUuids;
     use HasFactory;
-
-    /**
-     * Specifies table name
-     *
-     * @var string
-     */
-    public $table = 'branchOfficeProduct';
 
     /**
      * PK does not increment
@@ -30,14 +24,7 @@ class BranchOfficeProduct extends Model
      *
      * @var string
      */
-    public $keyType = 'string';
-
-    /**
-     * Specifies name of PK
-     *
-     * @var string
-     */
-    protected $primaryKey = 'uuid';
+    public $keyType = 'uuid';
 
     /**
      * Defines fillable parameters
@@ -52,20 +39,20 @@ class BranchOfficeProduct extends Model
     /**
      * Get the branch office associated with branch office product table
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function branchOffice()
+    public function branch_office()
     {
-        return $this->belongsTo(BranchOffice::class, 'branchOfficeId', 'uuid');
+        return $this->belongsTo(BranchOffice::class, 'branch_office_id', 'id');
     }
 
     /**
      * Get the product associated with the branch office product
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {
-        return $this->belongsTo(Product::class, 'productId', 'uuid');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

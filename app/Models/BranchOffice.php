@@ -4,22 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class BranchOffice extends Model
 {
     use HasUuids;
     use HasFactory;
-
-    /**
-     * Specifies table name
-     *
-     * @var string
-     */
-    public $table = 'branchOffice';
 
     /**
      * PK does not increment
@@ -33,14 +25,7 @@ class BranchOffice extends Model
      *
      * @var string
      */
-    public $keyType = 'string';
-
-    /**
-     * Specifies name of PK
-     *
-     * @var string
-     */
-    protected $primaryKey = 'uuid';
+    public $keyType = 'uuid';
 
     /**
      * Defines fillable parameters
@@ -55,20 +40,20 @@ class BranchOffice extends Model
     /**
      * Get all employees of one branch office
      *
-     * @return HasMany
+     * @return HasOneOrMany
      */
-    public function employees(): HasMany
+    public function employees(): HasOneOrMany
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Employee::class, 'branch_office_id');
     }
 
     /**
      * Get the products associated with the branch office
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return MorphToMany
      */
-    public function products()
+    public function products(): MorphToMany
     {
-        return $this->belongsToMany(Product::class, 'BranchOfficeProduct', 'branch_office_uuid', 'product_uuid');
+        return $this->morphToMany(Product::class, 'branch_office', 'product_id');
     }
 }

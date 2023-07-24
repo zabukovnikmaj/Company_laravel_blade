@@ -17,6 +17,8 @@ class BranchOfficeController extends Controller
      */
     public function list()
     {
+        $n = new BranchOffice();
+        dd($n->employees());
         $branchOffices = DB::table('BranchOffice')
             ->select('BranchOffice.*', DB::raw('GROUP_CONCAT(Products.name) AS products'))
             ->leftJoin('BranchOfficeProduct', 'BranchOffice.uuid', '=', 'BranchOfficeProduct.branch_office_uuid')
@@ -43,7 +45,7 @@ class BranchOfficeController extends Controller
         return view('branchOffice.edit', [
             'existingData' => $branchOffice,
             'products' => Product::all(),
-            'productsData' => $branchOffice->products->pluck('uuid')->toArray(),
+            'productsData' => $branchOffice->products->pluck('id')->toArray(),
             'title' => 'Edit branch office',
         ]);
     }
@@ -69,8 +71,8 @@ class BranchOfficeController extends Controller
 
         foreach ($validatedData['products'] as $product) {
             $branchOfficeProduct = new BranchOfficeProduct();
-            $branchOfficeProduct->branch_office_uuid = $branchOffice->uuid;
-            $branchOfficeProduct->product_uuid = $product;
+            $branchOfficeProduct->branch_office_id = $branchOffice->id;
+            $branchOfficeProduct->product_id = $product;
             $branchOfficeProduct->save();
         }
 

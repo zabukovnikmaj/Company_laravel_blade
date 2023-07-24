@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Employee extends Model
 {
@@ -25,14 +24,7 @@ class Employee extends Model
      *
      * @var string
      */
-    public $keyType = 'string';
-
-    /**
-     * Specifies name of PK
-     *
-     * @var string
-     */
-    protected $primaryKey = 'uuid';
+    public $keyType = 'uuid';
 
     /**
      * Defines fillable parameters
@@ -53,8 +45,8 @@ class Employee extends Model
      *
      * @return BelongsTo
      */
-    public function branchOffice(): BelongsTo
+    public function branch_office(): BelongsTo
     {
-        return $this->belongsTo(BranchOffice::class, 'branch_office', 'uuid');
+        return $this->belongsTo(BranchOffice::class, 'branch_office', 'id');
     }
 }

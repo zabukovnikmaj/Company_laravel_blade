@@ -18,8 +18,8 @@ class EmployeesController extends Controller
     public function list()
     {
         $employees = DB::table('employees')
-            ->join('branchOffice', 'employees.branch_office', '=', 'branchOffice.uuid')
-            ->select('employees.*', 'branchOffice.name AS branchOffice')
+            ->join('branch_offices', 'employees.branch_office_id', '=', 'branch_offices.id')
+            ->select('employees.*', 'branch_offices.name AS branchOffice')
             ->get()
             ->toArray();
 
@@ -63,7 +63,7 @@ class EmployeesController extends Controller
         ]);
 
         $employee = new Employee();
-        $employee->branch_office = $validatedData['branchOffice'];
+        $employee->branch_office_id = $validatedData['branch_office'];
         $employee->name = $validatedData['name'];
         $employee->position = $validatedData['position'];
         $employee->age = $validatedData['age'];
