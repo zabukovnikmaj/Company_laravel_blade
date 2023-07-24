@@ -28,13 +28,13 @@
                         <tr>
                             <td>{{ $branchOffice->name }}</td>
                             <td>{{ $branchOffice->address }}</td>
-                            <td>{{ $branchOffice->products }}</td>
+                            <td>{{ $branchOffice->products->pluck('name')->implode(', ') }}</td>
                             <td>
-                                <form action="{{ url('/branchOffice/delete', $branchOffice->uuid) }}"
+                                <form action="{{ url('/branchOffice/delete', $branchOffice->id) }}"
                                       method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ url('/branchOffice/edit', $branchOffice->uuid) }}"
+                                    <a href="{{ url('/branchOffice/edit', $branchOffice->id) }}"
                                        class="btn btn-primary btn-sm">Edit</a>
                                     <button type="submit" class="btn btn-danger btn-sm"
                                             onclick="return confirm('Confirm?');">Delete

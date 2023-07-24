@@ -45,7 +45,7 @@ class Product extends Model
      *
      * @return BelongsToMany
      */
-    public function branch_offices()
+    public function branch_offices(): BelongsToMany
     {
         return $this->belongsToMany(BranchOffice::class, 'branch_office_products', 'product_id', 'branch_office_id');
     }

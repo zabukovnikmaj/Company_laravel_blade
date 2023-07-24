@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
@@ -40,9 +41,9 @@ class BranchOffice extends Model
     /**
      * Get all employees of one branch office
      *
-     * @return HasOneOrMany
+     * @return HasMany
      */
-    public function employees(): HasOneOrMany
+    public function employees(): HasMany
     {
         return $this->hasMany(Employee::class, 'branch_office_id');
     }
@@ -52,8 +53,8 @@ class BranchOffice extends Model
      *
      * @return MorphToMany
      */
-    public function products(): MorphToMany
+    public function products(): BelongsToMany
     {
-        return $this->morphToMany(Product::class, 'branch_office', 'product_id');
+        return $this->belongsToMany(Product::class, 'branch_office_products', 'branch_office_id','product_id');
     }
 }

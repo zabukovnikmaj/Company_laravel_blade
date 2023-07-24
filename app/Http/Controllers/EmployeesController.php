@@ -17,14 +17,8 @@ class EmployeesController extends Controller
      */
     public function list()
     {
-        $employees = DB::table('employees')
-            ->join('branch_offices', 'employees.branch_office_id', '=', 'branch_offices.id')
-            ->select('employees.*', 'branch_offices.name AS branchOffice')
-            ->get()
-            ->toArray();
-
         return view('employees.list', [
-            'employees' => $employees,
+            'employees' => Employee::with('branch_office')->get(),
             'title' => 'List employees',
         ]);
     }

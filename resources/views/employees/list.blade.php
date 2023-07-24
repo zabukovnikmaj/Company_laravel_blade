@@ -29,7 +29,7 @@
                 @if (count($employees) > 0)
                     @foreach ($employees as $employee)
                         <tr>
-                            <td>{{ $employee->branchOffice == null ? 'This branch office does not exist!' : $employee->branchOffice }}</td>
+                            <td>{{ $employee->branch_office->name }}</td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ $employee->position }}</td>
                             <td>{{ $employee->age }}</td>
