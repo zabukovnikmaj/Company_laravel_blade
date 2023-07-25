@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <form
-                action="{{ isset($existingData->id) ? '/employees/edit/' . $existingData->id : '/employees/create' }}"
+                action="{{ isset($existingData->id) ? route('employee.edit', ['employee' => $existingData->id]) : route('employee.create') }}"
                 method="POST">
                 @csrf
                 @if(isset($existingData->name))
@@ -69,7 +69,7 @@
                 ></x-input>
 
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="/employees/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
+                <a href="{{ route('employee.list') }}" class="btn btn-default" style="margin-left: 10px">Back</a>
             </form>
         </div>
     </div>

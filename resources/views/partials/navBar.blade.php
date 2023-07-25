@@ -4,9 +4,9 @@
             <a class="navbar-brand" href="/">Company</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/branchOffice/list/">List branch offices</a></li>
-            <li><a href="/employees/list/">List employees</a></li>
-            <li><a href="/products/list/">List products</a></li>
+            <li><a href="{{ route('branchOffice.list') }}">List branch offices</a></li>
+            <li><a href="{{ route('employee.list') }}">List employees</a></li>
+            <li><a href="{{ route('product.list') }}">List products</a></li>
         </ul>
     </div>
 </nav>

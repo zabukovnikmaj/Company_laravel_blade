@@ -7,8 +7,8 @@
             {{ session('message') }}
         </div>
     @endif
-    <a href="{{ url('/products/create') }}" class="btn btn-primary">New product</a>
-    <a href="{{ url('/') }}" class="btn btn-default">Back</a>
+    <a href="{{ route('product.create') }}" class="btn btn-primary">New product</a>
+    <a href="{{ route('home') }}" class="btn btn-default">Back</a>
 
     <table class="table">
         <thead>
@@ -40,10 +40,10 @@
                              style="max-width: 300px; max-height: 300px">
                     </td>
                     <td>
-                        <form action="{{ url('/products/delete', $product?->id) }}" method="POST">
+                        <form action="{{ route('product.delete', ['product' => $product?->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <a href="{{ url('/products/edit', $product?->id) }}"
+                            <a href="{{ route('/products/edit', ['product' => $product?->id]) }}"
                                class="btn btn-primary btn-sm">Edit</a>
                             <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Are you sure you want to delete this product?');">Delete

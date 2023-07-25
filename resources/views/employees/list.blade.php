@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-md-12">
             <p>
-                <a href="{{ url('/employees/create') }}" class="btn btn-primary">New employee</a>
-                <a href="{{ url('/') }}" class="btn btn-default">Back</a>
+                <a href="{{ route('employee.create') }}" class="btn btn-primary">New employee</a>
+                <a href="{{ route('home') }}" class="btn btn-default">Back</a>
             </p>
             <table class="table">
                 <thead>
@@ -36,11 +36,10 @@
                             <td>{{ $employee?->sex }}</td>
                             <td>{{ $employee?->email }}</td>
                             <td>
-{{--                                <form action="{{ url('/employees/delete', $employee?->id) }}" method="POST">--}}
-                                <form action="{{ route('employee.delete', [$employee?->id]) }}" method="POST">
+                                <form action="{{ route('employee.delete', ['employee' => $employee?->id]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ route('employee.delete', [$employee?->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ route('employee.edit', ['employee' => $employee?->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</button>
                                 </form>
                             </td>

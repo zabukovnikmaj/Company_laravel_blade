@@ -4,7 +4,7 @@
     <h1>Enter information about the branch office</h1>
     <div class="col-md-12">
         <form
-            action="{{ isset($existingData->id) ? '/branchOffice/edit/' . $existingData->id : '/branchOffice/create' }}"
+            action="{{ isset($existingData->id) ? route('branchOffice.edit', ['branchOffice' => $existingData->id]) : route('branchOffice.create') }}"
             method="POST">
             @csrf
             @if(isset($existingData->name))
@@ -37,6 +37,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
-            <a href="/branchOffice/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
+            <a href="{{ route('branchOffice.create') }}" class="btn btn-default" style="margin-left: 10px">Back</a>
         </form>
 @endsection

@@ -2,8 +2,9 @@
 
 @section('content')
     <h1>Enter information about the products</h1>
-    <form action="{{ isset($existingData->id) ? '/products/edit/' . $existingData->id : '/products/create' }}"
-          method="POST" enctype="multipart/form-data">
+    <form action="{{ isset($existingData->id) ? route('product.edit', ['product' => $existingData->id]) : route('product.create') }}"
+          method="POST"
+          enctype="multipart/form-data">
         @csrf
         @if(isset($existingData->name))
             @method('PUT')
@@ -58,6 +59,6 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
-        <a href="/products/list/" class="btn btn-default" style="margin-left: 10px">Back</a>
+        <a href="{{ route('product.list') }}" class="btn btn-default" style="margin-left: 10px">Back</a>
     </form>
 @endsection

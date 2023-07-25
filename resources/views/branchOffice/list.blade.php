@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-md-12">
             <p>
-                <a href="{{ url('/branchOffice/create') }}" class="btn btn-primary">New branch office</a>
-                <a href="{{ url('/') }}" class="btn btn-default">Back</a>
+                <a href="{{ route('branchOffice.create') }}" class="btn btn-primary">New branch office</a>
+                <a href="{{ route('home') }}" class="btn btn-default">Back</a>
             </p>
             <table class="table">
                 <thead>
@@ -30,11 +30,11 @@
                             <td>{{ $branchOffice?->address }}</td>
                             <td>{{ $branchOffice?->products->pluck('name')->implode(', ') }}</td>
                             <td>
-                                <form action="{{ url('/branchOffice/delete', $branchOffice?->id) }}"
+                                <form action="{{ route('branchOffice.delete', ['branchOffice' => $branchOffice?->id]) }}"
                                       method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ url('/branchOffice/edit', $branchOffice?->id) }}"
+                                    <a href="{{ route('branchOffice.edit', ['branchOffice' => $branchOffice?->id]) }}"
                                        class="btn btn-primary btn-sm">Edit</a>
                                     <button type="submit" class="btn btn-danger btn-sm"
                                             onclick="return confirm('Are you sure you want to delete this branch office?');">Delete
