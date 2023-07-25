@@ -66,7 +66,7 @@ class BranchOfficeController extends Controller
             $branchOfficeProduct->save();
         }
 
-        return redirect('branchOffice/list/')->with('message', 'Branch office has been saved!');
+        return redirect()->route('branchOffice.list')->with('message', 'Branch office has been saved!');
     }
 
     /**
@@ -80,7 +80,7 @@ class BranchOfficeController extends Controller
     {
         $branchOffice->delete();
 
-        return redirect('branchOffice/list')->with('message', 'Branch office has been deleted!');
+        return redirect()->route('branchOffice.list')->with('message', 'Branch office has been deleted!');
     }
 
     /**
@@ -108,6 +108,6 @@ class BranchOfficeController extends Controller
             $branchOfficeProduct->save();
         }
 
-        return redirect('branchOffice/list')->with('message', 'Branch office has been updated!');
+        return redirect()->route('branchOffice.list')->with('message', 'Branch office has been updated!');
     }
 }

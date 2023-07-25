@@ -64,7 +64,7 @@ class EmployeesController extends Controller
         $employee->email = $validatedData['email'];
         $employee->save();
 
-        return redirect('employees/list/')->with('message', 'Employee has been saved!');
+        return redirect()->route('employee.list')->with('message', 'Employee has been saved!');
     }
 
     /**
@@ -78,7 +78,7 @@ class EmployeesController extends Controller
     {
         $employee->delete();
 
-        return redirect('employees/list')->with('message', 'Employee has been deleted!');
+        return redirect()->route('employee.list')->with('message', 'Employee has been deleted!');
     }
 
     /**
@@ -101,6 +101,6 @@ class EmployeesController extends Controller
 
         $employee->update($validatedData);
 
-        return redirect('employees/list')->with('message', 'Employee has been updated!');
+        return redirect()->route('employee.list')->with('message', 'Employee has been updated!');
     }
 }

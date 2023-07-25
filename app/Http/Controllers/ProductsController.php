@@ -65,10 +65,10 @@ class ProductsController extends Controller
             $file = $request->file('productFile');
             Storage::put('public/productImages/' . $product->uuid, $file);
 
-            return redirect('products/list/')->with('message', 'Product has been saved with picture!');
+            return redirect()->route('product.list')->with('message', 'Product has been saved with picture!');
         }
 
-        return redirect('products/list/')->with('message', 'Product has been saved!');
+        return redirect()->route('product.list')->with('message', 'Product has been saved!');
     }
 
     /**
@@ -85,7 +85,7 @@ class ProductsController extends Controller
         $dir = 'public/productImages/' . $product->uuid;
         Storage::deleteDirectory($dir);
 
-        return redirect('products/list')->with('message', 'Product has been deleted!');
+        return redirect()->route('product.list')->with('message', 'Product has been deleted!');
     }
 
     /**
@@ -113,9 +113,9 @@ class ProductsController extends Controller
             $file = $request->file('productFile');
             Storage::put($dir, $file);
 
-            return redirect('products/list/')->with('message', 'Product has been saved with picture!');
+            return redirect()->route('product.list')->with('message', 'Product has been saved with picture!');
         }
 
-        return redirect('products/list')->with('message', 'Product has been updated!');
+        return redirect()->route('product.list')->with('message', 'Product has been updated!');
     }
 }
