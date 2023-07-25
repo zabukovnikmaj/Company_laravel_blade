@@ -29,18 +29,19 @@
                 @if (count($employees) > 0)
                     @foreach ($employees as $employee)
                         <tr>
-                            <td>{{ $employee->branch_office->name }}</td>
-                            <td>{{ $employee->name }}</td>
-                            <td>{{ $employee->position }}</td>
-                            <td>{{ $employee->age }}</td>
-                            <td>{{ $employee->sex }}</td>
-                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee?->branch_office->name }}</td>
+                            <td>{{ $employee?->name }}</td>
+                            <td>{{ $employee?->position }}</td>
+                            <td>{{ $employee?->age }}</td>
+                            <td>{{ $employee?->sex }}</td>
+                            <td>{{ $employee?->email }}</td>
                             <td>
-                                <form action="{{ url('/employees/delete', $employee->id) }}" method="POST">
+{{--                                <form action="{{ url('/employees/delete', $employee?->id) }}" method="POST">--}}
+                                <form action="{{ route('employee.delete', [$employee?->id]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a href="{{ url('/employees/edit', $employee->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Confirm?');">Delete</button>
+                                    <a href="{{ route('employee.delete', [$employee?->id]) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</button>
                                 </form>
                             </td>
                         </tr>

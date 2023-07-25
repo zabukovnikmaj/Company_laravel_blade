@@ -25,13 +25,13 @@
         @if (count($products) > 0)
             @foreach ($products as $product)
                 <tr>
-                    <td>{{ $product['name'] }}</td>
-                    <td>{{ $product['description'] }}</td>
-                    <td>{{ $product['price'] }}</td>
-                    <td>{{ $product['date'] }}</td>
+                    <td>{{ $product?->name }}</td>
+                    <td>{{ $product?->description }}</td>
+                    <td>{{ $product?->price }}</td>
+                    <td>{{ $product?->date }}</td>
                     <td>
                         @php
-                            $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $product->uuid);
+                            $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $product?->id);
                             if(count($filename) === 0){
                                 $filename = [''];
                             }
@@ -40,13 +40,13 @@
                              style="max-width: 300px; max-height: 300px">
                     </td>
                     <td>
-                        <form action="{{ url('/products/delete', $product['uuid']) }}" method="POST">
+                        <form action="{{ url('/products/delete', $product?->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <a href="{{ url('/products/edit', $product['uuid']) }}"
+                            <a href="{{ url('/products/edit', $product?->id) }}"
                                class="btn btn-primary btn-sm">Edit</a>
                             <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Confirm?');">Delete
+                                    onclick="return confirm('Are you sure you want to delete this product?');">Delete
                             </button>
                         </form>
                     </td>

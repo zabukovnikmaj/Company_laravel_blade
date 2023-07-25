@@ -2,10 +2,10 @@
 
 @section('content')
     <h1>Enter information about the products</h1>
-    <form action="{{ isset($existingData['uuid']) ? '/products/edit/' . $existingData['uuid'] : '/products/create' }}"
+    <form action="{{ isset($existingData->id) ? '/products/edit/' . $existingData->id : '/products/create' }}"
           method="POST" enctype="multipart/form-data">
         @csrf
-        @if(isset($existingData['name']))
+        @if(isset($existingData->name))
             @method('PUT')
         @endif
 

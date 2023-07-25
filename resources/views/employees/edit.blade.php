@@ -10,10 +10,10 @@
     <div class="row">
         <div class="col-md-12">
             <form
-                action="{{ isset($existingData['uuid']) ? '/employees/edit/' . $existingData['uuid'] : '/employees/create' }}"
+                action="{{ isset($existingData->id) ? '/employees/edit/' . $existingData->id : '/employees/create' }}"
                 method="POST">
                 @csrf
-                @if(isset($existingData['name']))
+                @if(isset($existingData->name))
                     @method('PUT')
                 @endif
 
@@ -21,7 +21,7 @@
                     <label for="branch_office">Branch office name</label><br>
                     @include('partials.branchNameRadioButtons', [
                         'branchOffices' => $branchOffices,
-                        'existingBranchOfficeUuid' => isset($existingData->branchOffice->uuid) ? $existingData->branchOffice->uuid : ''
+                        'existingBranchOfficeUuid' => $existingData?->branchOffice?->id
                     ])
                     @error('branch_office')
                     <div class="alert alert-danger">{{ $message }}</div>

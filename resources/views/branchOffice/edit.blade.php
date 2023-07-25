@@ -4,10 +4,10 @@
     <h1>Enter information about the branch office</h1>
     <div class="col-md-12">
         <form
-            action="{{ isset($existingData->uuid) ? '/branchOffice/edit/' . $existingData['uuid'] : '/branchOffice/create' }}"
+            action="{{ isset($existingData->id) ? '/branchOffice/edit/' . $existingData->id : '/branchOffice/create' }}"
             method="POST">
             @csrf
-            @if(isset($existingData['name']))
+            @if(isset($existingData->name))
                 @method('PUT')
             @endif
 
@@ -32,7 +32,7 @@
                     'productsData' => $productsData,
                 ])
                 @error('products')
-                <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
