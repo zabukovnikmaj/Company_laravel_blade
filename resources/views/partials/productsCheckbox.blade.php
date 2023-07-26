@@ -1,9 +1,3 @@
-@php
-    if (empty($productsData)) {
-        $productsData = [];
-    }
-@endphp
-
 @if (isset($products) && !empty($products))
     @foreach ($products as $product)
         <label>
