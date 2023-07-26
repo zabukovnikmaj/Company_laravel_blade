@@ -13,7 +13,13 @@ class Product extends Model
     use HasUuids;
     use HasFactory;
 
+    /**
+     * Variable that stores filepath to the product image
+     *
+     * @var string
+     */
     public string $filename = '';
+    
 
     /**
      * PK does not increment

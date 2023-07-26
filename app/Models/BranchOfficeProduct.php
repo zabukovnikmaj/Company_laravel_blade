@@ -32,8 +32,8 @@ class BranchOfficeProduct extends Model
      * @var string[]
      */
     protected $fillable = [
-        'branch_office_uuid',
-        'product_uuid',
+        'branch_office_id',
+        'product_id',
     ];
 
     /**

@@ -44,7 +44,7 @@
             <label for="productFile">Product picture</label><br>
             <input type="file" class="form-control-file" name="productFile" id="productFile">
             @error('productFile')
-            <div class="alert alert-danger">{{ $message }}</div>
+                <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <br>
 

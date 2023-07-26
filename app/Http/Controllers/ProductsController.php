@@ -19,10 +19,9 @@ class ProductsController extends Controller
         $products = Product::all();
         foreach ($products as $product) {
             $filename = Storage::files('public/productImages/' . $product->id);
-            if(count($filename) === 0){
-                $filename = [''];
+            if (count($filename) !== 0) {
+                $product->filename = Storage::url($filename[0]);
             }
-            $product->filename = Storage::url($filename[0]);
         }
 
         return view('products.list', [
@@ -40,11 +39,12 @@ class ProductsController extends Controller
      */
     public function edit(Request $request, Product $product)
     {
-        $filename = Storage::files('public/productImages/' . $product->id);
-        if(count($filename) === 0){
-            $filename = [''];
+        if (Storage::disk('local')->exists('public/productImages/' . $product->id)) {
+            $filename = Storage::files('public/productImages/' . $product->id);
+            if (count($filename) !== 0) {
+                $product->filename = Storage::url($filename[0]);
+            }
         }
-        $product->filename = Storage::url($filename[0]);
 
         return view('products.edit', [
             'existingData' => $product,
