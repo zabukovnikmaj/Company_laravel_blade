@@ -25,7 +25,7 @@ Route::get('/', [Controllers\Controller::class, 'index'])->name('home');
 Route::prefix('branchOffice')->group(function () {
     Route::get('/list', [Controllers\BranchOfficeController::class, 'list'])->name('branchOffice.list');
     Route::get('/create', [Controllers\BranchOfficeController::class, 'edit'])->name('branchOffice.create');
-    Route::post('/create', [Controllers\BranchOfficeController::class, 'save'])->name('branchOffice.crete');
+    Route::post('/create', [Controllers\BranchOfficeController::class, 'save'])->name('branchOffice.create');
     Route::get('/edit/{branchOffice}', [Controllers\BranchOfficeController::class, 'edit'])->name('branchOffice.edit');
     Route::put('/edit/{branchOffice}', [Controllers\BranchOfficeController::class, 'update'])->name('branchOffice.edit');
     Route::delete('/delete/{branchOffice}', [Controllers\BranchOfficeController::class, 'delete'])->name('branchOffice.delete');

@@ -19,7 +19,7 @@ class Product extends Model
      * @var string
      */
     public string $filename = '';
-    
+
 
     /**
      * PK does not increment
