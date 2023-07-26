@@ -16,8 +16,17 @@ class ProductsController extends Controller
      */
     public function list()
     {
+        $products = Product::all();
+        foreach ($products as $product) {
+            $filename = Storage::files('public/productImages/' . $product->id);
+            if(count($filename) === 0){
+                $filename = [''];
+            }
+            $product->filename = Storage::url($filename[0]);
+        }
+
         return view('products.list', [
-            'products' => Product::all(),
+            'products' => $products,
             'title' => 'List products',
         ]);
     }
@@ -31,6 +40,12 @@ class ProductsController extends Controller
      */
     public function edit(Request $request, Product $product)
     {
+        $filename = Storage::files('public/productImages/' . $product->id);
+        if(count($filename) === 0){
+            $filename = [''];
+        }
+        $product->filename = Storage::url($filename[0]);
+
         return view('products.edit', [
             'existingData' => $product,
             'title' => 'Edit product',
@@ -63,7 +78,7 @@ class ProductsController extends Controller
 
         if ($request->hasFile('productFile')) {
             $file = $request->file('productFile');
-            Storage::put('public/productImages/' . $product->uuid, $file);
+            Storage::put('public/productImages/' . $product->id, $file);
 
             return redirect()->route('product.list')->with('message', 'Product has been saved with picture!');
         }
@@ -82,7 +97,7 @@ class ProductsController extends Controller
     {
         $product->delete();
 
-        $dir = 'public/productImages/' . $product->uuid;
+        $dir = 'public/productImages/' . $product->id;
         Storage::deleteDirectory($dir);
 
         return redirect()->route('product.list')->with('message', 'Product has been deleted!');
@@ -108,7 +123,7 @@ class ProductsController extends Controller
         $product->update($validatedData);
 
         if ($request->hasFile('productFile')) {
-            $dir = 'public/productImages/' . $product->uuid;
+            $dir = 'public/productImages/' . $product->id;
             Storage::deleteDirectory($dir);
             $file = $request->file('productFile');
             Storage::put($dir, $file);

@@ -48,13 +48,7 @@
             @enderror
             <br>
 
-            @php
-                $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $existingData->uuid);
-                if(count($filename) === 0){
-                    $filename = [''];
-                }
-            @endphp
-            <img src="{{ \Illuminate\Support\Facades\Storage::url($filename[0]) }}"
+            <img src="{{ $existingData?->filename }}"
                  alt="Product picture has not been uploaded yet!" style="max-width: 300px; max-height: 300px">
         </div>
 

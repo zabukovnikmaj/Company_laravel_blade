@@ -13,6 +13,8 @@ class Product extends Model
     use HasUuids;
     use HasFactory;
 
+    public string $filename = '';
+
     /**
      * PK does not increment
      *

@@ -30,20 +30,14 @@
                     <td>{{ $product?->price }}</td>
                     <td>{{ $product?->date }}</td>
                     <td>
-                        @php
-                            $filename = \Illuminate\Support\Facades\Storage::files('public/productImages/' . $product?->id);
-                            if(count($filename) === 0){
-                                $filename = [''];
-                            }
-                        @endphp
-                        <img src="{{ Storage::url($filename[0]) }}" alt="product picture"
+                        <img src="{{ $product?->filename }}" alt="product picture"
                              style="max-width: 300px; max-height: 300px">
                     </td>
                     <td>
                         <form action="{{ route('product.delete', ['product' => $product?->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
-                            <a href="{{ route('/products/edit', ['product' => $product?->id]) }}"
+                            <a href="{{ route('product.edit', ['product' => $product?->id]) }}"
                                class="btn btn-primary btn-sm">Edit</a>
                             <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Are you sure you want to delete this product?');">Delete
